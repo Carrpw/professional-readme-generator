@@ -1,5 +1,7 @@
 const inquirer = require('inquirer');
 const  fs = require('fs');
+const axios = require("axios");
+const formGenerator = require('./utils/generateMarkdown');
 
 
 // array of questions for user
@@ -16,14 +18,8 @@ const questions = [
             message: 'What is the description of your project?',
         },
         {
-            type: 'checkbox',
-            name: 'table of contents',
-            message: 'What would you like in your table of contents?',
-            choices: ['Title', 'Description', 'Table of Contents', 'Installation', 'Usage', 'License', 'Contributing', 'Tests', 'Questions'],
-        },
-        {
             type: 'input',
-            name: 'instructions',
+            name: 'installation',
             message: 'What are the installation instructions for your project?',
         },
         {
@@ -33,35 +29,59 @@ const questions = [
         },
         {
             type: 'input',
+            name: 'license',
+            message: 'Please provide the project license or badge link.'
+        },
+        {
+            type: 'input',
             name: 'contributors',
             message: 'Who were the contributors to this project?',
         },
         {
             type: 'input',
             name: 'tests',
-            mesage: 'Tests?',
+            message: 'Please give examples of test projects.',
         },
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Please provide your github username.',
+        },
+        {
+            type: 'input',
+            name: 'repository',
+            message: 'Please provide your repository link.'
+        },
+
 ];
 
 // function to write README file
 function writeToFile(fileName, data) {
     inquirer.prompt(questions).then((data) => {
-        fs.appendFile('readme.md', JSON.stringify(data, null, '\t'), (err) =>
-        err ? console.error(err) : console.log('File Created!')
+        const queryURL = "https://apigithub.com/users/${data.username}";
+        axios.get(queryURL).then(function(res) {
+            const githubInfo = {
+                profile: res.data.jtml_url,
+                name: res.data.name,
+                email: res.data.email,
+            };
+            fs.appendFile('readme.md', generate(data, githubInfo, '\t'), (err) =>
+            err ? console.error(err) : console.log('File Successfully Created!')
+        )}
     )});
 }
 
 // function to initialize program
-function init() {
+// function init() {
 
-}
+// }
 
 // function call to initialize program
-init();
+// init();
 
 
+// Psuedo-Code
 // fs.appendFile("readme.md", )
-
 // I need to make a function to write a readme
 // Maybe use fs.appendfile in order to make and write the readme
 // I need to create questions about what should be on the readme
