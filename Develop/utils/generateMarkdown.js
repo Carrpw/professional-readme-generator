@@ -4,6 +4,9 @@ function generateMarkdown(data) {
   
   # ${data.title}
 
+  [![License: ${data.license}](https://img.shields.io/badge/License-${data.license}-yellow.svg)](https://opensource.org/licenses/${data.license})
+
+
   ## Description
 
   ${data.description}
@@ -11,7 +14,6 @@ function generateMarkdown(data) {
   ## Table of Contents
 
   * [Description](#description)
-  * [Table of Contents](#table of contents)
   * [Installation](#installation)
   * [Usage](#usage)
   * [License](#license)
@@ -29,7 +31,7 @@ function generateMarkdown(data) {
 
   ### License
 
-  ${data.license}
+  [![License: ${data.license}](https://img.shields.io/badge/License-${data.license}-yellow.svg)](https://opensource.org/licenses/${data.license})
 
   ### Contributors
 
@@ -41,11 +43,11 @@ function generateMarkdown(data) {
 
   ### Questions
 
-  ${data.githubInfo.profile}
-  ${data.githubInfo.name}
-  ${data.githubInfo.email}
-  ${data.repository}
-  
+  *${data.profile}
+  *${data.name}
+  *${data.email}
+  *${data.repository}
+
 `;
 }
 

@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const  fs = require('fs');
-const axios = require("axios");
+// const axios = require('axios');
 const formGenerator = require('./utils/generateMarkdown');
 
 
@@ -28,9 +28,10 @@ const questions = [
             message: 'What is the usage of this program?'
         },
         {
-            type: 'input',
+            type: 'checkbox',
             name: 'license',
-            message: 'Please provide the project license or badge link.'
+            message: 'Please pick the project license you would like to use.',
+            choices: ['MIT', 'ISC', 'Zlib'],
         },
         {
             type: 'input',
@@ -44,8 +45,18 @@ const questions = [
         },
         {
             type: 'input',
+            name: 'profile',
+            message: 'Please provide your github profile username.',
+        },
+        {
+            type: 'input',
             name: 'name',
-            message: 'Please provide your github username.',
+            message: 'Please provide your name.'
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'Please provide an email you can be reached at for questions on your project.'
         },
         {
             type: 'input',
@@ -56,20 +67,13 @@ const questions = [
 ];
 
 // function to write README file
-function writeToFile(fileName, data) {
-    inquirer.prompt(questions).then((data) => {
-        const queryURL = "https://apigithub.com/users/${data.username}";
-        axios.get(queryURL).then(function(res) {
-            const githubInfo = {
-                profile: res.data.jtml_url,
-                name: res.data.name,
-                email: res.data.email,
-            };
-            fs.appendFile('readme.md', generate(data, githubInfo, '\t'), (err) =>
+// function writeToFile(fileName, data) {
+    inquirer.prompt(questions).then(function(data) {
+            fs.appendFile('readme.md', formGenerator(data), function(err) {
             err ? console.error(err) : console.log('File Successfully Created!')
-        )}
-    )});
-}
+            });
+    });
+// }
 
 // function to initialize program
 // function init() {
