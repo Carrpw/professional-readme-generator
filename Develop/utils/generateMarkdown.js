@@ -2,9 +2,7 @@
 function generateMarkdown(data) {
   return `
   
-  # ${data.title}
-
-  [![License: ${data.license}](https://img.shields.io/badge/License-${data.license}-yellow.svg)](https://opensource.org/licenses/${data.license})
+  # ${data.title}     [![License: ${data.license}](https://img.shields.io/badge/License-${data.license}-yellow.svg)](https://opensource.org/licenses/${data.license})
 
 
   ## Description
@@ -43,10 +41,10 @@ function generateMarkdown(data) {
 
   ### Questions
 
-  *${data.profile}
-  *${data.name}
-  *${data.email}
-  *${data.repository}
+  * ${data.profile}
+  * ${data.name}
+  * ${data.email}
+  * ${data.repository}
 
 `;
 }

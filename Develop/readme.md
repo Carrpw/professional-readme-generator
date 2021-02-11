@@ -39,8 +39,10 @@
 
   ### Questions
 
-  *Carrpw
-  *Paul
-  *paul@someemail.com
-  *https://github.com/Carrpw/professional-readme-generator
+  * Carrpw
+  * Paul Carr
+  * pwcarr15@gmail.com
+  * https://github.com/Carrpw/professional-readme-generator
 
+  
+ 
